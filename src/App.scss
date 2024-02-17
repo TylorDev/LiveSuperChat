@@ -1,0 +1,86 @@
+
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #1b1b1b;
+
+}
+
+.livechat{
+  border: 5px solid black;
+  background-color: white;
+}
+.chat-container {
+  width: 100%;
+  max-width: 500px;
+  max-height: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+
+  .chat-messages {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid black;
+
+    overflow-y: scroll;
+
+  }
+
+  .message {
+
+    color: #333333;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: fit-content;
+    max-width: 70%;
+
+  }
+
+  .message-input-form {
+    display: flex;
+    align-items: center;
+
+    .message-input {
+      flex: 1;
+      padding: 10px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      margin-right: 10px;
+      font-size: 16px;
+    }
+
+    .send-button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+}
+
+  
+  .enviador{
+
+  align-self: self-end;
+    background-color:  rgba(87, 224, 178, 0.455);
+  }
+
+  .receptor{
+    background-color: rgb(255, 255, 255);
+  }
