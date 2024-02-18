@@ -3,9 +3,17 @@ export function MessageViewer({
   messages,
   user,
   containerStyle,
-}) {
+})
+{
+  
+  const handleRightClick = (e) => {
+    e.preventDefault(); // Previene el comportamiento predeterminado del menú del clic derecho
+    console.log('Proximamente menu contextual'); // Muestra un mensaje por consola
+  };
+
+
   return (
-    <div ref={containerRef} className="chat-messages" style={containerStyle}>
+    <div ref={containerRef} className="chat-messages" style={containerStyle} onContextMenu={handleRightClick}>
       {messages.map((message, index) => (
         <div
           key={message.id}

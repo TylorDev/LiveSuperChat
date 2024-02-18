@@ -1,4 +1,6 @@
 export function InputPrincipal({handleMessageSubmit,  value, setInputPrincipal,  nickname,onClick}) {
+
+
   return <div className="inputPrincipal">
     <form onSubmit={handleMessageSubmit} className="message-input-form">
       <input
