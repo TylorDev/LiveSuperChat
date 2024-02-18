@@ -3,12 +3,42 @@ import { InputPrincipal } from "./InputPrincipal";
 import { UserCreate } from "./userCreate";
 import { MessageViewer } from "./MessageViewer";
 
+
+const exampleMessages = [
+  {
+    id: 1,
+    text: "¡Hola! ¿Cómo estás?",
+    user: "Usuario1",
+  },
+  {
+    id: 2,
+    text: "¡Hola Usuario1! Estoy bien, ¿y tú?",
+    user: "Usuario2",
+  },
+  {
+    id: 3,
+    text: "¡Estoy genial! Gracias por preguntar.",
+    user: "Usuario1",
+  },
+  {
+    id: 4,
+    text: "¿Qué has estado haciendo últimamente?",
+    user: "Usuario1",
+  },
+  {
+    id: 5,
+    text: "He estado trabajando en un nuevo proyecto de desarrollo web.",
+    user: "Usuario2",
+  },
+];
+
+
 export const Chat = () => {
   //USE STATE
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState(exampleMessages);
   const [inputValue, setInputValue] = useState("");
   const [inputPrincipal, setInputPrincipal] = useState("");
-  const [user, setUser] = useState("Receptor");
+  const [user, setUser] = useState("Usuario1");
   const [nickname, setNickName] = useState(false);
 
   // USE REF
@@ -18,7 +48,9 @@ export const Chat = () => {
   //USEEFFECT
   useEffect(() => {
 
-     
+    if(user=="Usuario1"){
+      setNickName(true);
+    }
     containerRef.current.scrollTop =
     containerRef.current.scrollHeight - containerRef.current.clientHeight;
     const storedMessages = JSON.parse(localStorage.getItem("chatMessages"));
@@ -48,8 +80,15 @@ export const Chat = () => {
   };
 
   const handleAddItem = () => {
+
+   
     if (inputValue.trim() !== "") {
       setUser(inputValue.trim());
+      setNickName(true);
+    }
+
+    else{
+      setUser("Usuario2")
       setNickName(true);
     }
   };
@@ -74,15 +113,40 @@ export const Chat = () => {
         "chatMessages",
         JSON.stringify([...messages, newMessage])
       );
-      setInputPrincipal("");
+     
     }
+    setInputPrincipal("");
+  };
+
+  const [clipboardLink, setClipboardLink] = useState('');
+  const [containerStyle, setContainerStyle] = useState({});
+
+  const handlePaste = () => {
+    navigator.clipboard.readText().then(pastedData => {
+      if (isValidLink(pastedData)) {
+        setClipboardLink(pastedData);
+      }
+    }).catch(error => {
+      console.error('Error al leer el portapapeles: ', error);
+    });
+  };
+
+  const isValidLink = (link) => {
+    return /^https?:\/\/.*/.test(link);
   };
 
 
-
+  const applyBackground = () => {
+    setContainerStyle({
+      backgroundImage: clipboardLink ? `url(${clipboardLink})` : 'none',
+    });
+  };
 
   return (
     <div className="chat-container">
+       <button onClick={handlePaste}>Pegar</button>
+       <button onClick={applyBackground}>Aplicar Fondo</button>
+       
       <UserCreate
         inputValue={inputValue}
         handleInputChange={handleInputChange}
@@ -94,11 +158,12 @@ export const Chat = () => {
         containerRef={containerRef}
         messages={messages}
         user={user}
+        containerStyle={containerStyle}
       />
 
       <InputPrincipal
         handleMessageSubmit={handleMessageSubmit}
-        InputPrincipal={inputPrincipal}
+        value={inputPrincipal}
         setInputPrincipal={setInputPrincipal}
         nickname={nickname}
       />

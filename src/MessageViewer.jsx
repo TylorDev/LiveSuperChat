@@ -1,5 +1,5 @@
-export function MessageViewer({containerRef, messages, user}) {
-  return <div ref={containerRef} className="chat-messages">
+export function MessageViewer({containerRef, messages, user, containerStyle }) {
+  return <div ref={containerRef} className="chat-messages"  style={containerStyle}>
     {messages.map((message, index) => (
       <div
         key={message.id}
