@@ -17,7 +17,7 @@ body{
   max-height: 500px;
   margin: 0 auto;
   padding: 20px;
-  border: 2px solid #ccc;
+  border: 2px solid #00000063;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   background-color: #f9f9f9;
@@ -29,7 +29,8 @@ body{
     display: flex;
     flex-direction: column;
     gap: 10px;
- 
+    background-image: url(https://i.pinimg.com/564x/b6/3a/2b/b63a2b9084e13bf5723f159350708c43.jpg);
+    background-size:contain ;
 
     overflow-y: scroll;
 
@@ -76,10 +77,10 @@ body{
 }
 
   
-  .enviador{
+  .emisor{
 
   align-self: self-end;
-    background-color:  rgba(87, 224, 178, 0.455);
+    background-color:  rgb(122, 230, 194);
   }
 
   .receptor{
