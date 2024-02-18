@@ -38,13 +38,27 @@ body{
 
   .message {
 
-    color: #333333;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width: fit-content;
-    max-width: 70%;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  max-width: 70%;
+    backdrop-filter: blur(4px);
+  }
 
+  .mensaje-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  
+  .mensaje-usuario {
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .mensaje-hora {
+    color: #888;
+    font-size: 0.8em;
   }
 
   .message-input-form {
@@ -80,9 +94,9 @@ body{
   .emisor{
 
   align-self: self-end;
-    background-color:  rgb(122, 230, 194);
+  background-color: #f8c6c6a6; 
   }
 
   .receptor{
-    background-color: rgb(255, 255, 255);
+    background-color: #eaeaeac7;
   }

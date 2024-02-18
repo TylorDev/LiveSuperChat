@@ -1,4 +1,4 @@
-export function InputPrincipal({handleMessageSubmit,  value, setInputPrincipal,  nickname}) {
+export function InputPrincipal({handleMessageSubmit,  value, setInputPrincipal,  nickname,onClick}) {
   return <div className="inputPrincipal">
     <form onSubmit={handleMessageSubmit} className="message-input-form">
       <input
@@ -8,7 +8,7 @@ export function InputPrincipal({handleMessageSubmit,  value, setInputPrincipal, 
         placeholder="Type your message..."
         className="message-input"
         disabled={!nickname} />
-      <button type="submit" className="send-button">
+      <button type="submit" className="send-button" onClick={onClick}>
         Send
       </button>
     </form>

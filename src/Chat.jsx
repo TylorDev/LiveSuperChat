@@ -6,29 +6,31 @@ import { MessageViewer } from "./MessageViewer";
 
 const exampleMessages = [
   {
-    id: 1,
+    id: 0,
     text: "¡Hola! ¿Cómo estás?",
     user: "Usuario1",
+    time: "15:52"
+  },
+  {
+    id: 1,
+    text: "¡Hola Usuario1! Estoy bien, ¿y tú?",
+    user: "Usuario2",
+    time: "15:55"
   },
   {
     id: 2,
-    text: "¡Hola Usuario1! Estoy bien, ¿y tú?",
-    user: "Usuario2",
+    text: "¡Estoy genial! Gracias por preguntar.",
+    time: "16:22"
   },
   {
     id: 3,
-    text: "¡Estoy genial! Gracias por preguntar.",
-    user: "Usuario1",
+    text: "¿Qué has estado haciendo últimamente?",
+    time: "16:43"
   },
   {
     id: 4,
-    text: "¿Qué has estado haciendo últimamente?",
-    user: "Usuario1",
-  },
-  {
-    id: 5,
     text: "He estado trabajando en un nuevo proyecto de desarrollo web.",
-    user: "Usuario2",
+    time: "16:57"
   },
 ];
 
@@ -40,7 +42,19 @@ export const Chat = () => {
   const [inputPrincipal, setInputPrincipal] = useState("");
   const [user, setUser] = useState("Usuario1");
   const [nickname, setNickName] = useState(false);
+  const [horaActual, setHoraActual] = useState('');
 
+  const obtenerHoraActual = () => {
+    const fecha = new Date();
+    const horas = fecha.getHours();
+    const minutos = fecha.getMinutes();
+
+    // Formatear las horas y minutos en un formato de 24 horas
+    const horaFormateada = `${horas < 10 ? '0' + horas : horas}:${minutos < 10 ? '0' + minutos : minutos}`;
+
+    // Actualizar el estado con la hora formateada
+    setHoraActual(horaFormateada);
+  };
   // USE REF
 
   const containerRef = useRef(null);
@@ -100,11 +114,13 @@ export const Chat = () => {
 
   const handleMessageSubmit = (e) => {
     e.preventDefault();
+ 
     if (inputPrincipal.trim() !== "") {
       const newMessage = {
         id: messages.length,
         text: inputPrincipal.trim(),
         user: user,
+        time: horaActual,
       };
       // Update messages state first
       setMessages([...messages, newMessage]);
@@ -116,6 +132,7 @@ export const Chat = () => {
      
     }
     setInputPrincipal("");
+
   };
 
   const [clipboardLink, setClipboardLink] = useState('');
@@ -162,6 +179,7 @@ export const Chat = () => {
       />
 
       <InputPrincipal
+      onClick={obtenerHoraActual}
         handleMessageSubmit={handleMessageSubmit}
         value={inputPrincipal}
         setInputPrincipal={setInputPrincipal}
