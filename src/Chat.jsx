@@ -19,16 +19,19 @@ const exampleMessages = [
   },
   {
     id: 2,
+    user: "Usuario1",
     text: "¡Estoy genial! Gracias por preguntar.",
     time: "16:22"
   },
   {
     id: 3,
+    user: "Usuario2",
     text: "¿Qué has estado haciendo últimamente?",
     time: "16:43"
   },
   {
     id: 4,
+    user: "Usuario1",
     text: "He estado trabajando en un nuevo proyecto de desarrollo web.",
     time: "16:57"
   },
@@ -121,6 +124,7 @@ export const Chat = () => {
         text: inputPrincipal.trim(),
         user: user,
         time: horaActual,
+        img: imageSrc || null,
       };
       // Update messages state first
       setMessages([...messages, newMessage]);
@@ -132,6 +136,7 @@ export const Chat = () => {
      
     }
     setInputPrincipal("");
+    setImageSrc("");
 
   };
 
@@ -152,24 +157,51 @@ export const Chat = () => {
     return /^https?:\/\/.*/.test(link);
   };
 
-
+  const inputFileRef = useRef(null);
   const applyBackground = () => {
     setContainerStyle({
       backgroundImage: clipboardLink ? `url(${clipboardLink})` : 'none',
     });
   };
 
+  const [imageSrc, setImageSrc] = useState(null);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      setImageSrc(reader.result);
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
+
+
+
+
+
   return (
     <div className="chat-container">
-       <button onClick={handlePaste}>Pegar</button>
-       <button onClick={applyBackground}>Aplicar Fondo</button>
-       
-      <UserCreate
+
+      <div className="utilidades"> 
+          <button onClick={handlePaste}>Pegar</button>
+          <button onClick={applyBackground}>Aplicar Fondo</button>
+          <div>
+            <button onClick={VaciarLocal}>Vaciar LocalStorage</button>
+          </div>
+          <UserCreate
         inputValue={inputValue}
         handleInputChange={handleInputChange}
         handleAddItem={handleAddItem}
         user={user}
       />
+      </div>
+      
+
 
       <MessageViewer
         containerRef={containerRef}
@@ -179,16 +211,17 @@ export const Chat = () => {
       />
 
       <InputPrincipal
+        ref={inputFileRef}
       onClick={obtenerHoraActual}
         handleMessageSubmit={handleMessageSubmit}
         value={inputPrincipal}
         setInputPrincipal={setInputPrincipal}
         nickname={nickname}
+        onChange={handleImageChange}
+        imageSrc={imageSrc}
       />
 
-      <div>
-        <button onClick={VaciarLocal}>Vaciar LocalStorage</button>
-      </div>
+      
     </div>
   );
 };
