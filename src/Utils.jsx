@@ -12,7 +12,7 @@ export function Utils({
 }) {
   return (
     <div className="utilidades">
-      <button onClick={handlePaste}>Pegar</button>
+      <button onClick={handlePaste}>Pegar Link de imagen de fondo</button>
       <button onClick={applyBackground}>Aplicar Fondo</button>
       <div>
         <button onClick={VaciarLocal}>Vaciar LocalStorage</button>

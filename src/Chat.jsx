@@ -165,7 +165,7 @@ export const Chat = () => {
 
   const [imageSrc, setImageSrc] = useState(null);
   const [friend, setFriend] = useState("Unknown");
-  const [profile, setProfile] = useState("user1.png");
+  const [profile, setProfile] = useState("user2.png");
 
   const handleFriend = (text) => {
     if (text != user) setFriend(text);
@@ -198,7 +198,6 @@ export const Chat = () => {
 
       <div className="chat-container">
         <div className="profile">
-          {console.log(friend + "  " + user)}
           <img src={profile} alt="" />
           <div>
             {friend}
