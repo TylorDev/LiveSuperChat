@@ -1,18 +1,13 @@
+/* eslint-disable react/prop-types */
 import { useRef } from "react";
-
-
 
 export function MessageViewer({
   containerRef,
   messages,
   user,
   containerStyle,
-}) 
-
-{
-
-
-
+  handleFriend,
+}) {
   const handleRightClick = (e) => {
     e.preventDefault(); // Previene el comportamiento predeterminado del menú del clic derecho
     console.log("Proximamente menu contextual"); // Muestra un mensaje por consola
@@ -32,17 +27,12 @@ export function MessageViewer({
             message.user == user ? "emisor message" : "receptor message"
           }
         >
-        
-        
-              <img className="imgAdjunta"
-                src={message.img}
-                alt=""
-              />
-           
+          <img className="imgAdjunta" src={message.img} alt="" />
+          {handleFriend(message.user)}
           <div className="mensaje-texto">{message.text}</div>
           <div className="mensaje-info">
             <span className="mensaje-usuario">{message.user}</span>
-          
+
             <span className="mensaje-hora">{message.time}</span>
           </div>
         </div>
